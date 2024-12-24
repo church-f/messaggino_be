@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "username": "cri",
+      "password": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "deviceMac": "30:AE:A4:07:0D:64",
+      "associatedUser": "leti"
+    },
+    {
+      "username": "leti",
+      "password": "6c569aabbf7775ef8fc5705a9f1f9b2f",
+      "deviceMac": "A8:42:E3:CB:4E:68",
+      "associatedUser": "cri"
+    }
+  ],
+  "devices": [
+    {
+      "macAddress": "30:AE:A4:07:0D:64",
+      "userAssociated": "cri",
+      "lastMessage": "test",
+      "r": 251,
+      "g": 15,
+      "b": 192,
+      "sound": false
+    },
+    {
+      "macAddress": "A8:42:E3:CB:4E:68",
+      "userAssociated": "leti",
+      "lastMessage": "ooooo",
+      "r": 251,
+      "g": 15,
+      "b": 192,
+      "sound": true
+    }
+  ]
+}
