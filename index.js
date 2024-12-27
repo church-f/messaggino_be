@@ -8,6 +8,13 @@ const PORT = 3002;
 // Middleware per il parsing del JSON
 app.use(express.json());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
+});
+
 // Percorso del file JSON
 const dataFile = "./data.json";
 
@@ -172,4 +179,4 @@ app.listen(PORT, () => {
 // WebSocket server
 console.log("WebSocket Server in ascolto su ws://localhost:3001");
 
-function getData() {}
+
