@@ -6,6 +6,11 @@ const app = express();
 const PORT = 3002;
 
 // Middleware per il parsing del JSON
+var log = console.log;
+
+console.log = function(msg){
+  log.apply(console, [new Date().toLocaleString()].concat(msg));
+};
 app.use(express.json());
 
 app.use(function(req, res, next) {
@@ -27,6 +32,15 @@ const connectedDevices = new Map(); // Chiave: macAddress, Valore: ws connection
 // Gestione connessione WebSocket
 wss.on("connection", (ws) => {
   console.log("Nuovo dispositivo connesso via WebSocket");
+
+  const interval = setInterval(() => {
+    if (ws.readyState === ws.OPEN) {
+      ws.ping();
+    }
+  }, 10000);
+  ws.on("pong", () => {
+    console.log(`Pong ricevuto`);
+  });
 
   // Assegna un evento per gestire i messaggi ricevuti dall'ESP32
   ws.on("message", (message) => {
@@ -71,6 +85,7 @@ wss.on("connection", (ws) => {
 
   // Gestione della disconnessione
   ws.on("close", () => {
+    clearInterval(interval);
     for (const [macAddress, socket] of connectedDevices.entries()) {
       if (socket === ws) {
         connectedDevices.delete(macAddress);
